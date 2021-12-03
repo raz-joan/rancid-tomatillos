@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import './App.css'
 import movieData from './movieData'
 import MovieContainer from './MovieContainer'
-import MovieDetails from './MovieDetails'
+// import MovieDetails from './MovieDetails'
 
 class App extends Component {
   constructor() {
     super()
+    this.state = {
+      movies: movieData.movies
+    }
   }
 
   render() {
@@ -15,7 +18,7 @@ class App extends Component {
         <header>
           <h1>Rancid Tomatillos</h1>
         </header>
-        <MovieContainer />
+        <MovieContainer movies={this.state.movies}/>
         {/* <MovieDetails /> */}
       </main>
     )

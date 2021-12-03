@@ -1,9 +1,10 @@
 import React from 'react'
 import './Movie.css'
 
-const Movie = () => {
+const Movie = (props) => {
+
     return (
-        <p>Hi Joan and Tony</p>
+        <img src={props.poster} alt={props.title} width='250px' height='350px'/>
     )
 }
 

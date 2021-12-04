@@ -9,7 +9,8 @@ class App extends Component {
     super()
     this.state = {
       movies: movieData.movies,
-      id: ''
+      id: '',
+      movie: {}
     }
   }
 
@@ -18,17 +19,20 @@ class App extends Component {
   }
 
   showMovie = (idNum) => {
-    console.log(idNum, "idnum")
-    this.setState({id: idNum})
+    const foundMovie = this.state.movies.find(movie => {
+      return movie.id === parseInt(idNum)
+    })
+    console.log(foundMovie)
+    this.setState({id: idNum, movie: foundMovie})
   }
 
   render() {
     return (
       <main>
         <header>
-          <h1>Rancid Tomatillos</h1>
+        <img src="https://fontmeme.com/permalink/211204/cca36d9d02af58d8feae92729d642f28.png" alt="squid-game-font" border="0" />
         </header>
-        {this.state.id ? <MovieCard movies={this.state.movies} showMain={this.showMain}/> : <MovieContainer movies={this.state.movies} showMovie={this.showMovie} />
+        {this.state.id ? <MovieCard movie={this.state.movie} showMain={this.showMain}/> : <MovieContainer movies={this.state.movies} showMovie={this.showMovie} />
         }
       </main>
     )

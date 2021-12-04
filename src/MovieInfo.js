@@ -3,9 +3,9 @@ import React from 'react'
 const MovieInfo = (props) => {
   return (
     <article>
-      <h2>Movie Title</h2>
-      <p>Date, Runtime, Rating, Genre</p>
-      <p>Summary</p>
+      <h2>{props.title}</h2>
+      <p>{props.date}</p>
+      <p>{props.rating}</p>
     </article>
   )
 }

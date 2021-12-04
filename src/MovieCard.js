@@ -1,21 +1,16 @@
 import React from 'react'
 import Movie from './Movie'
+import MovieInfo from './MovieInfo'
 
 
 const MovieCard =(props) => {
     return (
       <article>
-        {/* <Movie poster={movie.poster_path} title={movie.title}/> */}
-        {/* <video controls width="500" src="https://www.youtube.com/watch?v=ozUuAcGOhPs">
-          {/* <source src="https://www.youtube.com/watch?v=ozUuAcGOhPs" /> */}
-          Sorry, your browser doesn't support embedded videos.
-        {/* </video> */} */
-        <iframe src='https://www.youtube.com/watch?v=ozUuAcGOhPs'
-        // frameborder='0'
-        // allow='autoplay; encrypted-media'
-        // allowfullscreen
-        title='video'
-/>
+        <Movie poster={props.movies[1].poster_path} title={props.movies[1].title}/>
+        <MovieInfo />
+       
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/ozUuAcGOhPs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <button onClick={() => props.showMain()}>Return</button>
       </article>
     )
 }

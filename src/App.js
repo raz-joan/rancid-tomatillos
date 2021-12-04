@@ -8,8 +8,18 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      movies: movieData.movies
+      movies: movieData.movies,
+      id: ''
     }
+  }
+
+  showMain = () => {
+    this.setState({id: ''})
+  }
+
+  showMovie = (idNum) => {
+    console.log(idNum, "idnum")
+    this.setState({id: idNum})
   }
 
   render() {
@@ -18,8 +28,8 @@ class App extends Component {
         <header>
           <h1>Rancid Tomatillos</h1>
         </header>
-        {/* <MovieContainer movies={this.state.movies}/> */}
-        <MovieCard />
+        {this.state.id ? <MovieCard movies={this.state.movies} showMain={this.showMain}/> : <MovieContainer movies={this.state.movies} showMovie={this.showMovie} />
+        }
       </main>
     )
   }

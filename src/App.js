@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './App.css'
-import movieData from './movieData'
 import MovieContainer from './MovieContainer'
 import MovieCard from './MovieCard'
 
@@ -11,7 +10,8 @@ class App extends Component {
       movies: [],
       id: '',
       movie: {},
-      error: ''
+      error: '',
+      trailer: ''
     }
   }
 
@@ -31,16 +31,18 @@ class App extends Component {
   }
 
   showMovie = (idNum) => {
-    console.log(this.state.movie, 'first')
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}`)
       .then((res) => res.json())
       .then((data) => {
         this.setState({ movie: data.movie, id: idNum, error: '' })
-        console.log(this.state.movie, 'second')
-
       })
       .catch((err) => {
         this.setState({ error: err.message })
+      })
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}/videos`)
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ trailer: data.videos[0].key })
       })
   }
 
@@ -55,7 +57,7 @@ class App extends Component {
         <header>
         <img src="https://fontmeme.com/permalink/211204/cca36d9d02af58d8feae92729d642f28.png" alt="squid-game-font" border="0" />
         </header>
-        {this.state.id ? <MovieCard movie={this.state.movie} showMain={this.showMain}/> : <MovieContainer movies={this.state.movies} showMovie={this.showMovie} />
+        {this.state.id ? <MovieCard movie={this.state.movie} trailer={this.state.trailer} showMain={this.showMain}/> : <MovieContainer movies={this.state.movies} showMovie={this.showMovie}  />
         }
       </main>
     )

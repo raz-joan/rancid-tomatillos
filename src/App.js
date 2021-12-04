@@ -42,7 +42,7 @@ class App extends Component {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}/videos`)
       .then((res) => res.json())
       .then((data) => {
-        this.setState({ trailer: data.videos[0].key })
+        this.setState({ trailer: data.videos[0].key, error: '' })
       })
   }
 

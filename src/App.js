@@ -8,25 +8,48 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      movies: movieData.movies,
+      movies: [],
       id: '',
-      movie: {}
+      movie: {},
+      error: ''
     }
   }
 
+  componentDidMount = () => {
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ movies: data.movies, error: '' })
+      })
+      .catch((err) => {
+        this.setState({ error: err.message })
+      })
+    }
+    
   showMain = () => {
     this.setState({id: ''})
   }
 
   showMovie = (idNum) => {
-    const foundMovie = this.state.movies.find(movie => {
-      return movie.id === parseInt(idNum)
-    })
-    console.log(foundMovie)
-    this.setState({id: idNum, movie: foundMovie})
+    console.log(this.state.movie, 'first')
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}`)
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ movie: data.movie, id: idNum, error: '' })
+        console.log(this.state.movie, 'second')
+
+      })
+      .catch((err) => {
+        this.setState({ error: err.message })
+      })
   }
 
   render() {
+    if (this.state.error) {
+      return (
+        <h2>Oops, something went wrong. Try again later.  Error: '{this.state.error}'</h2>
+      )
+    }
     return (
       <main>
         <header>

@@ -1,4 +1,5 @@
 import React from 'react'
+import './MovieInfo.css'
 
 const MovieInfo = (props) => {
   const genreType = props.genre.map(type => {
@@ -7,13 +8,13 @@ const MovieInfo = (props) => {
     )
   })
   return (
-    <article>
-      <h2>{props.title}</h2>
-      <p>Release Date: {props.date}</p>
-      <p>Rating: {(props.rating).toFixed(1)}</p>
-      <p>Runtime: {props.runtime} min</p>
-      <div>{genreType}</div>
-      <p>{props.summary}</p>
+    <article className='movie-info'>
+      <h2 className='title'>{props.title}</h2>
+      <p className='sub-detail'>Release Date: {props.date}</p>
+      <p className='sub-detail'>Rating: {(props.rating).toFixed(1)}</p>
+      <p className='sub-detail'>Runtime: {props.runtime} min</p>
+      <div className='genre'>{genreType}</div>
+      <p className='summary'>{props.summary}</p>
     </article>
   )
 }

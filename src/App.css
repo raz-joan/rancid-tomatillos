@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.title {
+  margin: 20px;
+  
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  height: 20%;
+  background-color: #249f9c;
+}
+
+.title:hover {
+  cursor: pointer;
+}

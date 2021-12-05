@@ -54,11 +54,20 @@ class App extends Component {
     }
     return (
       <main>
-        <header>
-        <img src="https://fontmeme.com/permalink/211204/cca36d9d02af58d8feae92729d642f28.png" alt="squid-game-font" border="0" />
+        <header className='header'>
+        <img className='title' src="https://fontmeme.com/permalink/211204/cca36d9d02af58d8feae92729d642f28.png" alt="squid-game-font" width="65%" onClick={() => this.showMain()}/>
         </header>
-        {this.state.id ? <MovieCard movie={this.state.movie} trailer={this.state.trailer} showMain={this.showMain}/> : <MovieContainer movies={this.state.movies} showMovie={this.showMovie}  />
-        }
+        <body className='body'>
+          {this.state.id ? 
+          <MovieCard 
+          movie={this.state.movie} 
+          trailer={this.state.trailer} 
+          showMain={this.showMain}/> : 
+          <MovieContainer 
+          movies={this.state.movies} 
+          showMovie={this.showMovie}  />
+          }
+        </body>
       </main>
     )
   }

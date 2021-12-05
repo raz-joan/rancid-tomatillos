@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './App.css'
-import movieData from './movieData'
 import MovieContainer from './MovieContainer'
 import MovieCard from './MovieCard'
 
@@ -8,31 +7,57 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      movies: movieData.movies,
+      movies: [],
       id: '',
-      movie: {}
+      movie: {},
+      error: '',
+      trailer: ''
     }
   }
 
+  componentDidMount = () => {
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ movies: data.movies, error: '' })
+      })
+      .catch((err) => {
+        this.setState({ error: err.message })
+      })
+    }
+    
   showMain = () => {
     this.setState({id: ''})
   }
 
   showMovie = (idNum) => {
-    const foundMovie = this.state.movies.find(movie => {
-      return movie.id === parseInt(idNum)
-    })
-    console.log(foundMovie)
-    this.setState({id: idNum, movie: foundMovie})
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}`)
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ movie: data.movie, id: idNum, error: '' })
+      })
+      .catch((err) => {
+        this.setState({ error: err.message })
+      })
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}/videos`)
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ trailer: data.videos[0].key, error: '' })
+      })
   }
 
   render() {
+    if (this.state.error) {
+      return (
+        <h2>Oops, something went wrong. Try again later.  Error: '{this.state.error}'</h2>
+      )
+    }
     return (
       <main>
         <header>
         <img src="https://fontmeme.com/permalink/211204/cca36d9d02af58d8feae92729d642f28.png" alt="squid-game-font" border="0" />
         </header>
-        {this.state.id ? <MovieCard movie={this.state.movie} showMain={this.showMain}/> : <MovieContainer movies={this.state.movies} showMovie={this.showMovie} />
+        {this.state.id ? <MovieCard movie={this.state.movie} trailer={this.state.trailer} showMain={this.showMain}/> : <MovieContainer movies={this.state.movies} showMovie={this.showMovie}  />
         }
       </main>
     )

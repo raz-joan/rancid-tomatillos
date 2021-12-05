@@ -2,7 +2,6 @@ import React from 'react'
 import Movie from './Movie'
 import MovieInfo from './MovieInfo'
 import './MovieCard.css'
-import  redbox from './redbox.png'
 
 
 const MovieCard =(props) => {
@@ -30,9 +29,7 @@ const MovieCard =(props) => {
           <iframe width="560" height="315" src={`https://www.youtube.com/embed/${props.trailer}`} title="YouTube video player" frameBorder="2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>  
           </iframe>
           <img className='back-img' src="https://fontmeme.com/permalink/211205/3aa3c3b8f115a7f3c42e0de18d43b8de.png" alt="squid-game-font" border="0" onClick={() => props.showMain()} />
-        
         </div>
-       
       </article>
     )
 }

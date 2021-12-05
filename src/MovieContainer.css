@@ -3,6 +3,8 @@
     grid-gap: 1%;
     grid-template-columns: repeat(auto-fill, minmax(250px, auto));
     margin: 1%;
+    margin-top: 0;
     height: 100%;
-    margin-top: 2%;
+    margin-top: 2px;
+    background-color: rgb(206, 248, 248);
 }

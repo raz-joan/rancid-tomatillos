@@ -42,7 +42,8 @@ class App extends Component {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}/videos`)
       .then((res) => res.json())
       .then((data) => {
-        this.setState({ trailer: data.videos[0].key, error: '' })
+        const trailerId = data.videos.find(video => video.type === 'Trailer')
+        this.setState({ trailer: trailerId.key, error: '' })
       })
   }
 
@@ -57,7 +58,9 @@ class App extends Component {
         <header>
         <img src="https://fontmeme.com/permalink/211204/cca36d9d02af58d8feae92729d642f28.png" alt="squid-game-font" border="0" />
         </header>
-        {this.state.id ? <MovieCard movie={this.state.movie} trailer={this.state.trailer} showMain={this.showMain}/> : <MovieContainer movies={this.state.movies} showMovie={this.showMovie}  />
+        {this.state.id ?
+          <MovieCard movie={this.state.movie} trailer={this.state.trailer} showMain={this.showMain} />
+          : <MovieContainer movies={this.state.movies} showMovie={this.showMovie} />
         }
       </main>
     )

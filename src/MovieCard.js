@@ -1,19 +1,38 @@
 import React from 'react'
-import Movie from './Movie'
-import MovieInfo from './MovieInfo'
+import './MovieCard.css'
 
-
-const MovieCard =(props) => {
+const MovieCard = (props) => {
+  const genreType = props.movie.genres.map((type, index) => {
     return (
-      <article>
-        <Movie poster={props.movie.poster_path} title={props.movie.title} key={Date.now()}/>
-        <MovieInfo key={Date.now() + 1} title={props.movie.title} date={props.movie.release_date} rating={props.movie.average_rating} summary={props.movie.overview} runtime={props.movie.runtime} genre={props.movie.genres} />
-       
-        <iframe width="560" height="315" src={`https://www.youtube.com/embed/${props.trailer}`} title="YouTube video player" frameBorder="2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        <button onClick={() => props.showMain()}>Return</button>
-      </article>
+      <p key={index}>{type}</p>
     )
+  })
+  return (
+    <article>
+      <img
+        src={props.movie.poster_path}
+        alt={props.movie.title}
+        width='250px'
+        height='350px'
+      />
+      <article>
+        <h2>{props.movie.title}</h2>
+        <p>Release Date: {props.movie.release_date}</p>
+        <p>Rating: {(props.movie.average_rating).toFixed(1)}</p>
+        <p>Runtime: {props.movie.runtime} min</p>
+        <div>Genre(s): {genreType}</div>
+        <p>{props.movie.summary}</p>
+      </article>
+      <iframe
+        width="560"
+        height="315"
+        src={`https://www.youtube.com/embed/${props.trailer}`}
+        title="YouTube video player"
+        frameBorder="2">
+      </iframe>
+      <button onClick={() => props.showMain()}>Return</button>
+    </article>
+  )
 }
-
 
 export default MovieCard

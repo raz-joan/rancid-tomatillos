@@ -56,6 +56,7 @@ class App extends Component {
         <h2>Oops, something went wrong. Try again later. Error: '{this.state.error}'</h2>
       )
     }
+    
     return (
       <main>
         <header className='header'>

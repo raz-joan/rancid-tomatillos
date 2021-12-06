@@ -10,8 +10,8 @@ class App extends Component {
       movies: [],
       id: '',
       movie: {},
-      error: '',
-      trailer: ''
+      trailer: '',
+      error: ''
     }
   }
 
@@ -42,30 +42,42 @@ class App extends Component {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}/videos`)
       .then((res) => res.json())
       .then((data) => {
-        this.setState({ trailer: data.videos[0].key, error: '' })
+        const trailerId = data.videos.find(video => video.type === 'Trailer')
+        this.setState({ trailer: trailerId.key, error: '' })
+      })
+      .catch((err) => {
+        this.setState({ error: err.message })
       })
   }
 
   render() {
     if (this.state.error) {
       return (
-        <h2>Oops, something went wrong. Try again later.  Error: '{this.state.error}'</h2>
+        <h2>Oops, something went wrong. Try again later. Error: '{this.state.error}'</h2>
       )
     }
+    
     return (
       <main>
         <header className='header'>
-        <img className='title' src="https://fontmeme.com/permalink/211204/cca36d9d02af58d8feae92729d642f28.png" alt="squid-game-font" width="65%" onClick={() => this.showMain()}/>
+          <img
+            className='title'
+            src="https://fontmeme.com/permalink/211204/cca36d9d02af58d8feae92729d642f28.png"
+            alt="Rancid Tomatillos Title Image"
+            onClick={() => this.showMain()}
+          />
         </header>
         <body className='body'>
           {this.state.id ? 
-          <MovieCard 
-          movie={this.state.movie} 
-          trailer={this.state.trailer} 
-          showMain={this.showMain}/> : 
-          <MovieContainer 
-          movies={this.state.movies} 
-          showMovie={this.showMovie}  />
+            <MovieCard 
+              movie={this.state.movie} 
+              trailer={this.state.trailer} 
+              showMain={this.showMain}
+            /> :
+            <MovieContainer 
+              movies={this.state.movies} 
+              showMovie={this.showMovie}
+            />
           }
         </body>
       </main>

@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import './App.css'
 import MovieContainer from './MovieContainer'
 import MovieCard from './MovieCard'
+import {Route, Routes, Link} from 'react-router-dom'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       movies: [],
-      id: '',
       movie: {},
       trailer: '',
       error: ''
@@ -26,15 +26,16 @@ class App extends Component {
       })
     }
     
-  showMain = () => {
-    this.setState({id: ''})
-  }
+  // showMain = () => {
+  //   this.setState({id: ''})
+  // }
 
   showMovie = (idNum) => {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}`)
       .then((res) => res.json())
       .then((data) => {
-        this.setState({ movie: data.movie, id: idNum, error: '' })
+        console.log(data.movie, 'data.movie')
+        this.setState({ movie: data.movie, error: '' })
       })
       .catch((err) => {
         this.setState({ error: err.message })
@@ -58,17 +59,26 @@ class App extends Component {
     }
     
     return (
-      <main>
+      <>
         <header className='header'>
           <img
             className='title'
             src="https://fontmeme.com/permalink/211204/cca36d9d02af58d8feae92729d642f28.png"
-            alt="Rancid Tomatillos Title Image"
-            onClick={() => this.showMain()}
+            alt="Rancid Tomatillos Title"
+            
           />
         </header>
-        <body className='body'>
-          {this.state.id ? 
+        <main className='body'>
+          <Routes>
+            <Route path="/" element={<MovieContainer 
+              movies={this.state.movies}
+              showMovie={this.showMovie} />} />
+
+            <Route path="/:movieId" element={<MovieCard
+              movie={this.state.movie} 
+              trailer={this.state.trailer} />} />
+          </Routes>
+          {/* {this.state.id ? 
             <MovieCard 
               movie={this.state.movie} 
               trailer={this.state.trailer} 
@@ -77,10 +87,10 @@ class App extends Component {
             <MovieContainer 
               movies={this.state.movies} 
               showMovie={this.showMovie}
-            />
+            /> */}
           }
-        </body>
-      </main>
+        </main>
+      </>
     )
   }
 }

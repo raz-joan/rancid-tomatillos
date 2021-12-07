@@ -1,7 +1,10 @@
 import React from 'react'
 import './MovieCard.css'
+import { Link } from 'react-router-dom'
 
-const MovieCard = ({movie, trailer, showMain}) => {
+const MovieCard = ({movie, trailer}) => {
+  console.log(movie.genre, 'genre')
+
   
   const genreTypes = movie.genres.map((type, index) => {
     return (
@@ -36,12 +39,14 @@ const MovieCard = ({movie, trailer, showMain}) => {
           frameBorder="2"
         >
         </iframe>
-        <img
-          className='back-img'
-          src="https://fontmeme.com/permalink/211205/3aa3c3b8f115a7f3c42e0de18d43b8de.png"
-          alt="return to main page button"
-          onClick={() => showMain()}
-        />
+        <Link to="/">
+          <img
+            className='back-img'
+            src="https://fontmeme.com/permalink/211205/3aa3c3b8f115a7f3c42e0de18d43b8de.png"
+            alt="return to main page button"
+            // onClick={() => showMain()}
+          />
+        </Link>
       </div>
     </article>
   )

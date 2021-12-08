@@ -1,17 +1,26 @@
 import React, { Component } from 'react'
 import './App.css'
 import MovieContainer from './MovieContainer'
-import MovieCard from './MovieCard'
+import Wrapper from './MovieCard'
 import {Route, Routes, Link} from 'react-router-dom'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      movies: [],
-      movie: {},
-      trailer: '',
-      error: ''
+      movies: []
+      // movie: {
+      //   id: '',
+      //   title: '',
+      //   poster_path: '',
+      //   release_date: '',
+      //   average_rating: 0,
+      //   genres: [],
+      //   overview: '',
+      //   runtime: ''
+      // },
+      // trailer: '',
+      // error: ''
     }
   }
 
@@ -26,38 +35,26 @@ class App extends Component {
       })
   }
 
-  showMovie = (idNum) => {
-    this.setState({
-      movie: {
-        id: '',
-        title: '',
-        poster_path: '',
-        release_date: '',
-        average_rating: 0,
-        genres: [],
-        overview: '',
-        runtime: ''
-      }
-    })
+  // showMovie = (idNum) => {
 
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}`)
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({ movie: data.movie, error: '' })
-      })
-      .catch((err) => {
-        this.setState({ error: err.message })
-      })
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}/videos`)
-      .then((res) => res.json())
-      .then((data) => {
-        const trailerId = data.videos.find(video => video.type === 'Trailer')
-        this.setState({ trailer: trailerId.key, error: '' })
-      })
-      .catch((err) => {
-        this.setState({ error: err.message })
-      })
-  }
+  //   fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       this.setState({ movie: data.movie, error: '' })
+  //     })
+  //     .catch((err) => {
+  //       this.setState({ error: err.message })
+  //     })
+  //   fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}/videos`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const trailerId = data.videos.find(video => video.type === 'Trailer')
+  //       this.setState({ trailer: trailerId.key, error: '' })
+  //     })
+  //     .catch((err) => {
+  //       this.setState({ error: err.message })
+  //     })
+  // }
 
   render() {
     if (this.state.error) {
@@ -83,10 +80,22 @@ class App extends Component {
               movies={this.state.movies}
               showMovie={this.showMovie} />}
             />
-            <Route path="/:movieId" element={<MovieCard
+            <Route path="/:movieId" element={<Wrapper />} />
+            {/* <Route path="/:movieId" element={<MovieCard
               movie={this.state.movie} 
               trailer={this.state.trailer} />}
-            />
+            /> */}
+            {/* {this.state.movies.map(movie => {
+              return (
+                <Route key={movie.id} path={`/${movie.id}`} element={
+                  <MovieCard
+                    movie={this.state.movie}
+                    trailer={this.state.trailer}
+                  />}
+                />
+              )
+            })} */}
+            <Route path="*" element={<h2>404 Error Baby!</h2>}/>
           </Routes>
         </main>
       </>

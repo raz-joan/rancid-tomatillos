@@ -1,7 +1,9 @@
 import React from 'react'
 import './Movie.css'
 
-const Movie = ({id, title, poster, showMovie}) => {
+// const Movie = ({id, title, poster, showMovie}) => {
+const Movie = ({ id, title, poster }) => {
+
 
     return (
         <img
@@ -9,7 +11,7 @@ const Movie = ({id, title, poster, showMovie}) => {
             src={poster}
             alt={title}
             id={id}
-            onClick={(event) => showMovie(event.target.id)}
+            // onClick={(event) => showMovie(event.target.id)}
         />
     )
 }

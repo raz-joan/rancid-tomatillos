@@ -1,7 +1,6 @@
 import React from 'react'
 import './Movie.css'
 
-// const Movie = ({id, title, poster, showMovie}) => {
 const Movie = ({ id, title, poster }) => {
 
 
@@ -11,7 +10,6 @@ const Movie = ({ id, title, poster }) => {
             src={poster}
             alt={title}
             id={id}
-            // onClick={(event) => showMovie(event.target.id)}
         />
     )
 }

@@ -31,7 +31,7 @@ const Wrapper = () => {
           this.setState({ movie: data.movie, error: '' })
         })
         .catch((err) => {
-          this.setState({ error: err.code })
+          this.setState({ error: err })
         })
       fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieID}/videos`)
         .then((res) => res.json())
@@ -40,7 +40,7 @@ const Wrapper = () => {
           this.setState({ trailer: trailerId.key, error: '' })
         })
         .catch((err) => {
-          this.setState({ error: err.code })
+          this.setState({ error: err })
         })
     }
 

@@ -3,8 +3,6 @@ import Movie from './Movie'
 import './MovieContainer.css'
 import { Link } from 'react-router-dom';
 
-
-// const MovieContainer = ({movies, showMovie}) => {
 const MovieContainer = ({ movies }) => {
 
     const movieElements = movies.map(movie => {
@@ -15,7 +13,6 @@ const MovieContainer = ({ movies }) => {
                 id={movie.id}
                 poster={movie.poster_path}
                 title={movie.title}
-                // showMovie={showMovie}
             />
         </Link>
         )

@@ -8,19 +8,8 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      movies: []
-      // movie: {
-      //   id: '',
-      //   title: '',
-      //   poster_path: '',
-      //   release_date: '',
-      //   average_rating: 0,
-      //   genres: [],
-      //   overview: '',
-      //   runtime: ''
-      // },
-      // trailer: '',
-      // error: ''
+      movies: [],
+      error: ''
     }
   }
 
@@ -34,27 +23,6 @@ class App extends Component {
         this.setState({ error: err.message })
       })
   }
-
-  // showMovie = (idNum) => {
-
-  //   fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       this.setState({ movie: data.movie, error: '' })
-  //     })
-  //     .catch((err) => {
-  //       this.setState({ error: err.message })
-  //     })
-  //   fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}/videos`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       const trailerId = data.videos.find(video => video.type === 'Trailer')
-  //       this.setState({ trailer: trailerId.key, error: '' })
-  //     })
-  //     .catch((err) => {
-  //       this.setState({ error: err.message })
-  //     })
-  // }
 
   render() {
     if (this.state.error) {
@@ -81,21 +49,6 @@ class App extends Component {
               showMovie={this.showMovie} />}
             />
             <Route path="/:movieId" element={<Wrapper />} />
-            {/* <Route path="/:movieId" element={<MovieCard
-              movie={this.state.movie} 
-              trailer={this.state.trailer} />}
-            /> */}
-            {/* {this.state.movies.map(movie => {
-              return (
-                <Route key={movie.id} path={`/${movie.id}`} element={
-                  <MovieCard
-                    movie={this.state.movie}
-                    trailer={this.state.trailer}
-                  />}
-                />
-              )
-            })} */}
-            <Route path="*" element={<h2>404 Error Baby!</h2>}/>
           </Routes>
         </main>
       </>

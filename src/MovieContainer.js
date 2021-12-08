@@ -1,7 +1,7 @@
 import React from 'react'
 import Movie from './Movie'
 import './MovieContainer.css'
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const MovieContainer = ({movies, showMovie}) => {
@@ -14,7 +14,7 @@ const MovieContainer = ({movies, showMovie}) => {
                 poster={movie.poster_path}
                 title={movie.title}
                 showMovie={showMovie}
-                />
+            />
         </Link>
         )
     })

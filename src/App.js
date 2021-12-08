@@ -24,17 +24,25 @@ class App extends Component {
       .catch((err) => {
         this.setState({ error: err.message })
       })
-    }
-    
-  // showMain = () => {
-  //   this.setState({id: ''})
-  // }
+  }
 
   showMovie = (idNum) => {
+    this.setState({
+      movie: {
+        id: '',
+        title: '',
+        poster_path: '',
+        release_date: '',
+        average_rating: 0,
+        genres: [],
+        overview: '',
+        runtime: ''
+      }
+    })
+
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${idNum}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.movie, 'data.movie')
         this.setState({ movie: data.movie, error: '' })
       })
       .catch((err) => {
@@ -61,34 +69,25 @@ class App extends Component {
     return (
       <>
         <header className='header'>
-          <img
-            className='title'
-            src="https://fontmeme.com/permalink/211204/cca36d9d02af58d8feae92729d642f28.png"
-            alt="Rancid Tomatillos Title"
-            
-          />
+          <Link to='/'>
+            <img
+              className='title'
+              src="https://fontmeme.com/permalink/211204/cca36d9d02af58d8feae92729d642f28.png"
+              alt="Rancid Tomatillos Title"
+            />
+          </Link>
         </header>
         <main className='body'>
           <Routes>
             <Route path="/" element={<MovieContainer 
               movies={this.state.movies}
-              showMovie={this.showMovie} />} />
-
+              showMovie={this.showMovie} />}
+            />
             <Route path="/:movieId" element={<MovieCard
               movie={this.state.movie} 
-              trailer={this.state.trailer} />} />
+              trailer={this.state.trailer} />}
+            />
           </Routes>
-          {/* {this.state.id ? 
-            <MovieCard 
-              movie={this.state.movie} 
-              trailer={this.state.trailer} 
-              showMain={this.showMain}
-            /> :
-            <MovieContainer 
-              movies={this.state.movies} 
-              showMovie={this.showMovie}
-            /> */}
-          }
         </main>
       </>
     )

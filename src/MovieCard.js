@@ -26,12 +26,18 @@ const Wrapper = () => {
 
     componentDidMount = () => {
       fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieID}`)
-        .then((res) => res.json())
+        .then(res => {
+          if (res.ok) {
+            return res.json()
+          } else {
+            throw new Error()
+          }
+        })
         .then((data) => {
           this.setState({ movie: data.movie, error: '' })
         })
         .catch((err) => {
-          this.setState({ error: err })
+          this.setState({ error: err.message })
         })
       fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieID}/videos`)
         .then((res) => res.json())
@@ -40,21 +46,21 @@ const Wrapper = () => {
           this.setState({ trailer: trailerId.key, error: '' })
         })
         .catch((err) => {
-          this.setState({ error: err })
+          this.setState({ error: err.message })
         })
     }
 
     render() {
+      if (this.state.error) {
+        return (
+          <h2 classsName='error'>404: Movie Not Found</h2>
+        )
+      }
+
       if (!this.state.movie.title) {
         return <h2 className="loading">LOADING...</h2>
       }
 
-      if (this.state.error) {
-        return (
-          <h2>Oops, something went wrong. Try again later. Error: '{this.state.error}'</h2>
-        )
-      }
-      
       return (
         <article className='movie-card-section'>
           <div className='movie-card-top-section'>

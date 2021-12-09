@@ -84,4 +84,14 @@ describe('Main page', () => {
     .get('.movie-container').find('[id=718444]')
 
   })
+
+  it('should have sad paths', () => {
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/00001',{
+      movie:{
+        "error": "No movie found with id:00001"
+      }
+    })
+    cy.visit('http://localhost:3000/00001')
+    .get('h2').contains('404: Movie Not Found')
+  })
 })

@@ -3,6 +3,7 @@ import './App.css'
 import MovieContainer from './MovieContainer'
 import Wrapper from './MovieCard'
 import {Route, Routes, Link} from 'react-router-dom'
+import apiCalls from './apiCalls'
 
 class App extends Component {
   constructor() {
@@ -16,13 +17,13 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({ movies: data.movies, error: '' })
-      })
-      .catch((err) => {
-        this.setState({ error: err.message })
+    apiCalls.allMovies()
+      .then(data => {
+        if (data.movies) {
+          this.setState({ movies: data.movies, error: '' })
+        } else {
+          this.setState({error: data.message})
+        }
       })
   }
 

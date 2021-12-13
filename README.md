@@ -24,7 +24,7 @@ This project introduced us to the React framework along with React Router and en
 - Cypress
 
 ## Illustrations!  
-[Uploading rancid gif small.gif…]()
+![rancid gif small](https://user-images.githubusercontent.com/70819338/145878368-7c01677c-2f58-40d2-be23-a4512422f243.gif)
 
 
 ## Setup

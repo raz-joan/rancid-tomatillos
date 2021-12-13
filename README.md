@@ -23,7 +23,9 @@ This project introduced us to the React framework along with React Router and en
 - CSS
 - Cypress
 
-## Illustrations
+## Illustrations!  
+[Uploading rancid gif small.gif…]()
+
 
 ## Setup
 1. Fork and then clone down this repo to your local machine.

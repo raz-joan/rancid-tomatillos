@@ -30,7 +30,7 @@ This project introduced us to the React framework along with React Router and en
 ## Setup
 1. Fork and then clone down this repo to your local machine.
 2. In your terminal, move into the project's root directory.
-3. Then, run the command `npm start`.
+3. Then, run the commands `npm install` and `npm start`.
 4. In your browser, navigate to [http://localhost:3000/](http://localhost:3000/) to see the project.
 
 ## Wins

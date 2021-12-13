@@ -72,7 +72,7 @@ class App extends Component {
             onChange={event => this.handleChange(event)}
           />
         </header>
-        <main className='body'>
+        <main>
           <Routes>
             <Route path="/" element={<MovieContainer 
               movies={this.state.filteredMovies.length ? this.state.filteredMovies : this.state.movies}

@@ -30,3 +30,8 @@ input {
   margin-bottom: 1%;
   border: none;
 }
+
+.error,
+.loading {
+  font-size: 40px;
+}

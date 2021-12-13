@@ -11,18 +11,18 @@ class App extends Component {
     this.state = {
       movies: [],
       error: '',
-      search:'',
+      search: '',
       filteredMovies: []
     }
   }
 
   componentDidMount = () => {
-    apiCalls.allMovies()
+    apiCalls.fetchInfo('')
       .then(data => {
         if (data.movies) {
           this.setState({ movies: data.movies, error: '' })
         } else {
-          this.setState({error: data.message})
+          this.setState({ error: data.message })
         }
       })
   }
@@ -30,7 +30,7 @@ class App extends Component {
   handleChange = event => {
     this.setState({search: event.target.value})
     const searchedMovies = this.state.movies.filter(movie => {
-      return movie.title.toLowerCase().includes(`${ event.target.value }`)
+      return movie.title.toLowerCase().includes(`${ event.target.value.toLowerCase() }`)
     })
     this.setState({ filteredMovies: searchedMovies })
     if (!event.target.value) {
@@ -45,9 +45,14 @@ class App extends Component {
   render() {
     if (this.state.error) {
       return (
-        <h2>Oops, something went wrong. Try again later. Error: '{this.state.error}'</h2>
+        <h2 className='error'>Oops, something went wrong: '{this.state.error}'</h2>
       )
-    } 
+    }
+
+    if (!this.state.movies[0]) {
+      return <h2 className="loading">LOADING...</h2>
+    }
+
     return (
       <>
         <header className='header'>
@@ -71,7 +76,7 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<MovieContainer 
               movies={this.state.filteredMovies.length ? this.state.filteredMovies : this.state.movies}
-              showMovie={this.showMovie} />}
+            />}
             />
             <Route path="/:movieId" element={<Wrapper />} />
           </Routes>

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import './App.css'
+import '../CSS/App.css'
 import MovieContainer from './MovieContainer'
 import Wrapper from './MovieCard'
 import {Route, Routes, Link} from 'react-router-dom'
-import apiCalls from './apiCalls'
+import apiCalls from '../apiCalls'
 
 class App extends Component {
   constructor() {

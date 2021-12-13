@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import './MovieCard.css'
+import '../CSS/MovieCard.css'
 import { Link, useParams } from 'react-router-dom'
-import apiCalls from './apiCalls'
+import apiCalls from '../apiCalls'
 
 const Wrapper = () => {
   const movieID = useParams().movieId

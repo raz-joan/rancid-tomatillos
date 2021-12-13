@@ -3,7 +3,6 @@ import './Movie.css'
 
 const Movie = ({ id, title, poster }) => {
 
-
     return (
         <img
             className='image'

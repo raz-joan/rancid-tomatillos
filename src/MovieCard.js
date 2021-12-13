@@ -26,22 +26,24 @@ const Wrapper = () => {
     }
 
     componentDidMount = () => {
-      apiCalls.singleMovie(movieID)
+      apiCalls.fetchInfo(movieID)
       .then(data => {
         if (data.movie) {
           this.setState({ movie: data.movie, error: '' })
         } else {
-          this.setState({error: data.message})
+          this.setState({ error: data })
         }
       })
 
-      apiCalls.singleMovieVideo(movieID)
+      apiCalls.fetchInfo(`${movieID}/videos`)
       .then(data => {
         if (data.videos) {
           const trailerId = data.videos.find(video => video.type === 'Trailer')
-          this.setState({ trailer: trailerId.key, error: '' })
+          if (trailerId) {
+            this.setState({ trailer: trailerId.key, error: '' })
+          }
         } else {
-          this.setState({ error: data.message })
+          this.setState({ error: data })
         }
       })
     }

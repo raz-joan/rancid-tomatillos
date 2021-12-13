@@ -82,16 +82,29 @@ describe('Main page', () => {
     .get('.movie-container').find('[id=694919]')
     .get('.movie-container').find('[id=337401]')
     .get('.movie-container').find('[id=718444]')
+  })
 
+  it('should search for a movie and display all movies when search is cleared', () => {
+    cy.get('.movie-container').find('[id=694919]')
+    .get('.movie-container').find('[id=337401]')
+    .get('.movie-container').find('[id=718444]')
+
+    .get('input').type('money')
+    .get('.movie-container').find('[id=694919]')
+    .get('.movie-container').find('[id=337401]').should('not.exist')
+    .get('.movie-container').find('[id=718444]').should('not.exist')
+
+    .get('input').clear()
+    .get('.movie-container').find('[id=694919]')
+    .get('.movie-container').find('[id=337401]')
+    .get('.movie-container').find('[id=718444]')
   })
 
   it('should have sad paths', () => {
     cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/00001',{
-      movie:{
         "error": "No movie found with id:00001"
-      }
     })
-    cy.visit('http://localhost:3000/00001')
-    .get('h2').contains('404: Movie Not Found')
+    .visit('http://localhost:3000/00001')
+    .get('.error').contains('404: Movie Not Found')
   })
 })

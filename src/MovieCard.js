@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './MovieCard.css'
 import { Link, useParams } from 'react-router-dom'
+import apiCalls from './apiCalls'
 
 const Wrapper = () => {
   const movieID = useParams().movieId
@@ -25,35 +26,32 @@ const Wrapper = () => {
     }
 
     componentDidMount = () => {
-      fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieID}`)
-        .then(res => {
-          if (res.ok) {
-            return res.json()
-          } else {
-            throw new Error()
-          }
-        })
-        .then((data) => {
+      apiCalls.fetchInfo(movieID)
+      .then(data => {
+        if (data.movie) {
           this.setState({ movie: data.movie, error: '' })
-        })
-        .catch((err) => {
-          this.setState({ error: err.message })
-        })
-      fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${movieID}/videos`)
-        .then((res) => res.json())
-        .then((data) => {
+        } else {
+          this.setState({ error: data })
+        }
+      })
+
+      apiCalls.fetchInfo(`${movieID}/videos`)
+      .then(data => {
+        if (data.videos) {
           const trailerId = data.videos.find(video => video.type === 'Trailer')
-          this.setState({ trailer: trailerId.key, error: '' })
-        })
-        .catch((err) => {
-          this.setState({ error: err.message })
-        })
+          if (trailerId) {
+            this.setState({ trailer: trailerId.key, error: '' })
+          }
+        } else {
+          this.setState({ error: data })
+        }
+      })
     }
 
     render() {
       if (this.state.error) {
         return (
-          <h2 classsName='error'>404: Movie Not Found</h2>
+          <h2 className='error'>404: Movie Not Found</h2>
         )
       }
 

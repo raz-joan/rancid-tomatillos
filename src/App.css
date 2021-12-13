@@ -11,6 +11,7 @@
   justify-content: center;
   height: 20%;
   background-color: #249f9c;
+  align-items: flex-end;
 }
 
 img {
@@ -19,4 +20,18 @@ img {
 
 .body {
   background-color: rgb(206, 248, 248);
+}
+
+input { 
+  width: 10%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(206, 248, 248);
+  margin-bottom: 1%;
+  border: none;
+}
+
+.error,
+.loading {
+  font-size: 40px;
 }

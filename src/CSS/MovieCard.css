@@ -79,3 +79,14 @@ h2 {
   left: 40%;
   font-size: 40px;
 }
+
+@media screen and (max-width: 730px) {
+  .movie-card-top-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .movie-card-poster {
+    width: 40%;
+  }
+}
